@@ -1,5 +1,5 @@
 "use client";
-
+import Navbar from "@/components/Navbar";
 import { useEffect, useState } from "react";
 
 type Reference = {
@@ -23,6 +23,8 @@ export default function ReferencesPage() {
   }, []);
 
   return (
+    <>
+    <Navbar />
     <main className="min-h-screen bg-slate-950 p-8 text-white">
       <div className="mx-auto max-w-5xl">
         <a href="/dashboard" className="text-sm text-blue-400 hover:text-blue-300">
@@ -74,5 +76,6 @@ export default function ReferencesPage() {
         </div>
       </div>
     </main>
+    </>
   );
 }
