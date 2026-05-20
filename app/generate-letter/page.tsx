@@ -2,7 +2,14 @@
 
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+type Reference = {
+  id: number;
+  fullName: string;
+};
+
+
 
 export default function GenerateLetterPage() {
   const [formData, setFormData] = useState({
@@ -12,8 +19,18 @@ export default function GenerateLetterPage() {
     positionDescription: "",
   });
 
+
   const [emailDraft, setEmailDraft] = useState("");
   const [letterDraft, setLetterDraft] = useState("");
+   const [references, setReferences] = useState<Reference[]>([]);
+
+  useEffect(() => {
+  const savedReferences = JSON.parse(
+    localStorage.getItem("references") || "[]"
+  );
+
+  setReferences(savedReferences);
+}, []);
 
   function handleChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -89,9 +106,14 @@ ${formData.reference}`;
               onChange={handleChange}
               className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 outline-none focus:border-blue-500"
             >
-              <option>Professor</option>
+              {/* <option>Professor</option>
               <option>Team lead</option>
-              <option>Manager</option>
+              <option>Manager</option> */}
+              {references.map((reference) => (
+              <option key={reference.id}>
+              {reference.fullName}
+              </option>
+   ))}
             </select>
 
             <textarea
