@@ -9,6 +9,11 @@ type Reference = {
   fullName: string;
 };
 
+type Achievement = {
+  id: number;
+  title: string;
+};
+
 
 
 export default function GenerateLetterPage() {
@@ -22,7 +27,8 @@ export default function GenerateLetterPage() {
 
   const [emailDraft, setEmailDraft] = useState("");
   const [letterDraft, setLetterDraft] = useState("");
-   const [references, setReferences] = useState<Reference[]>([]);
+  const [references, setReferences] = useState<Reference[]>([]);
+  const [achievements, setAchievements] = useState<Achievement[]>([]);
 
   useEffect(() => {
   const savedReferences = JSON.parse(
@@ -30,6 +36,12 @@ export default function GenerateLetterPage() {
   );
 
   setReferences(savedReferences);
+
+  const savedAchievements = JSON.parse(
+  localStorage.getItem("achievements") || "[]"
+);
+
+  setAchievements(savedAchievements);
 }, []);
 
   function handleChange(
@@ -106,10 +118,8 @@ ${formData.reference}`;
               onChange={handleChange}
               className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 outline-none focus:border-blue-500"
             >
-              {/* <option>Professor</option>
-              <option>Team lead</option>
-              <option>Manager</option> */}
-              <option value="">Select a reference</option>
+              
+              <option>Select a reference</option>
 
               {references.map((reference) => (
               <option key={reference.id} value={reference.fullName}>
@@ -117,6 +127,25 @@ ${formData.reference}`;
               </option>
      ))}
             </select>
+{/*             
+            <div>
+              <label className="mb-2 block text-sm font-medium">
+                Select Achievement
+              </label> */}
+
+            <select
+              className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 outline-none focus:border-blue-500"
+  >
+            <option>Select an achievement</option>
+
+            {achievements.map((achievement) => (
+              <option key={achievement.id}>
+                {achievement.title}
+              </option>
+            ))}
+          </select>
+        {/* </div> */}
+
 
             <textarea
               name="positionDescription"
