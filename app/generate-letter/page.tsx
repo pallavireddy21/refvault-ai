@@ -109,11 +109,13 @@ ${formData.reference}`;
               {/* <option>Professor</option>
               <option>Team lead</option>
               <option>Manager</option> */}
+              <option value="">Select a reference</option>
+
               {references.map((reference) => (
-              <option key={reference.id}>
+              <option key={reference.id} value={reference.fullName}>
               {reference.fullName}
               </option>
-   ))}
+     ))}
             </select>
 
             <textarea
