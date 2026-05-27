@@ -21,6 +21,7 @@ export default function GenerateLetterPage() {
     positionTitle: "",
     organization: "",
     reference: "",
+    selectedAchievement: "",
     positionDescription: "",
   });
 
@@ -127,19 +128,17 @@ ${formData.reference}`;
               </option>
      ))}
             </select>
-{/*             
-            <div>
-              <label className="mb-2 block text-sm font-medium">
-                Select Achievement
-              </label> */}
 
             <select
+              name="selectedAchievement"
+              value={formData.selectedAchievement}
+              onChange={handleChange}
               className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 outline-none focus:border-blue-500"
   >
             <option>Select an achievement</option>
 
             {achievements.map((achievement) => (
-              <option key={achievement.id}>
+              <option key={achievement.id} value={achievement.title}>
                 {achievement.title}
               </option>
             ))}
